@@ -4,7 +4,7 @@ from numpy import size
 from face_rec import FaceRec
 
 #load camera
-capture = cv2.VideoCapture(0)
+# capture = cv2.VideoCapture(0)
 #Encode faces from folder
 sfr = FaceRec()
 
