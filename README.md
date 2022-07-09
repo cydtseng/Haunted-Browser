@@ -40,3 +40,8 @@
 
 **Known Issues**
 1. App may not run if there are multiple possible webcam sources
+
+
+
+**Installation References**
+1. https://note.nkmk.me/en/python-pip-install-requirements/
