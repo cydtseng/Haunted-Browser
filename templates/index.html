@@ -1,0 +1,17 @@
+{% extends 'base.html'%}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body%}
+<h2 class="text-center">Hey! No Peeping!</h2>
+<div class="mb-3">
+    <label for="formFile" class="form-label">Default file input example</label>
+    <form class="p-3 text-center" action="/" method="POST" enctype="multipart/form-data">
+        <input class="form-control" type="file" name="imageFile">
+        <input class="btn btn-primary mt-3" type="submit" value="Upload User Image">
+    </form>
+    
+</div>
+{% endblock %}
