@@ -4,7 +4,7 @@ from numpy import size
 from face_rec import FaceRec
 
 #load camera
-capture = cv2.VideoCapture(1)
+capture = cv2.VideoCapture(0)
 #Encode faces from folder
 sfr = FaceRec()
 
@@ -21,7 +21,7 @@ class Video(object):
         
         scare_img = cv2.imread('./ghost.webp')
         scare_img_size = (wb, hb)
-        
+
         scare_img = cv2.resize(scare_img, scare_img_size)
         scare_grey =cv2.cvtColor(scare_img, cv2.COLOR_BGR2GRAY)
         ret, mask = cv2.threshold(scare_grey, 1 ,255, cv2.THRESH_BINARY)
