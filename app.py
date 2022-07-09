@@ -1,10 +1,18 @@
 from fileinput import filename
 from flask import Flask, render_template, request, Response, flash, redirect
 from camera import Video
+from whitenoise import WhiteNoise
 import os
 import shutil
 
 app = Flask(__name__)
+app.wsgi_app = WhiteNoise(app.wsgi_app)
+my_static_folders = (
+    "static/css/",
+    "static/uploads/",
+)
+for static in my_static_folders:
+    app.wsgi_app.add_files(static)
 
 app.secret_key = "notsosecret"
 UPLOAD_FOLDER = 'static/uploads/'
