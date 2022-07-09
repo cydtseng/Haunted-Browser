@@ -4,7 +4,7 @@ import os
 import glob
 import numpy as np
 
-class FaceRecognition:
+class FaceRec:
     def __init__(self):
         self.known_face_encodings = []
         self.known_face_names = []

@@ -1,12 +1,12 @@
 import cv2
 import numpy as np
 from numpy import size
-from face_recognition import FaceRecognition
+from face_rec import FaceRec
 
 #load camera
 capture = cv2.VideoCapture(0)
 #Encode faces from folder
-sfr = FaceRecognition()
+sfr = FaceRec()
 
 class Video(object):
     def __init__(self):
