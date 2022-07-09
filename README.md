@@ -29,3 +29,14 @@
 3. Bootstrap
 4. Flask
 5. OpenCV
+
+
+**Test The Project**
+1. Download code base
+2. On your terminal, run "sudo pip3 install -r requirements.txt"
+3. Then again on your terminal, run "python3 app.py"
+4. Head to the displayed url on your terminal and start testing!
+
+
+**Known Issues**
+1. App may not run if there are multiple possible webcam sources
