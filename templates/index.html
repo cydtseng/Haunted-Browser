@@ -8,8 +8,19 @@
 <h2 class="text-center">Hey! No Peeping!</h2>
 <div class="mb-3">
     <label for="formFile" class="form-label">Default file input example</label>
+    <p>
+        {%with messages = get_flashed_messages()%}
+          {% if messages %}
+            <ul>
+                {% for message in messages%}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}  
+    </p>
     <form class="p-3 text-center" action="/" method="POST" enctype="multipart/form-data">
-        <input class="form-control" type="file" name="imageFile">
+        <input class="form-control" type="file" name="imageFile" automcomplete="off" required>
         <input class="btn btn-primary mt-3" type="submit" value="Upload User Image">
     </form>
     
