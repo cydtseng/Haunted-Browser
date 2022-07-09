@@ -1,7 +1,19 @@
-from flask import Flask, render_template, request, Response
+from fileinput import filename
+from flask import Flask, render_template, request, Response, flash, redirect
 from camera import Video
+import os
+import shutil
 
 app = Flask(__name__)
+
+app.secret_key = "notsosecret"
+UPLOAD_FOLDER = 'static/uploads/'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'webp'])
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/', methods= ['GET'])
 def index():
@@ -9,11 +21,23 @@ def index():
 
 @app.route('/', methods=['POST'])
 def detect():
-    #get the user image
+    if 'imageFile' not in request.files:
+        flash('No file part')
+        return redirect(request.url)
     imageFile = request.files['imageFile']
-    image_path = './img/' + imageFile.filename
-    imageFile.save(image_path)
-    return render_template('video.html')
+    if imageFile.filename == '':
+        flash('No image selected for uploading')
+        return redirect(request.url)
+    if imageFile and allowed_file(imageFile.filename):
+        isdir = os.path.isdir(app.config['UPLOAD_FOLDER']) 
+        if isdir:
+            shutil.rmtree(app.config['UPLOAD_FOLDER'])
+        os.mkdir(app.config['UPLOAD_FOLDER'])
+        imageFile.save(os.path.join(app.config['UPLOAD_FOLDER'], imageFile.filename))
+        return render_template('video.html')
+    else :
+        flash('Allowed image types are - png, jpg, jpeg, webp')
+        return redirect(request.url)
 
 
 def render(camera):

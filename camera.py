@@ -10,8 +10,8 @@ sfr = FaceRec()
 
 class Video(object):
     def __init__(self):
-        self.video = cv2.VideoCapture(1)
-        sfr.load_img_for_encoding('img/')
+        self.video = cv2.VideoCapture(0)
+        sfr.load_img_for_encoding('./static/uploads')
     def __del__(self):
         self.video.release()
     def get_frame(self):
