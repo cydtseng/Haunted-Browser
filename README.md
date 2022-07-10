@@ -25,7 +25,7 @@
 
 1. Python
 2. HTML
-3. Bootstrap
+3. CSS
 4. Flask
 5. OpenCV
 
