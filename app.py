@@ -8,6 +8,7 @@ app = Flask(__name__)
 
 app.secret_key = "notsosecret"
 UPLOAD_FOLDER = 'static/uploads/'
+SCARE_FOLDER = 'static/scare/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'webp'])
@@ -21,19 +22,29 @@ def index():
 
 @app.route('/', methods=['POST'])
 def detect():
-    if 'imageFile' not in request.files:
-        flash('No file part')
-        return redirect(request.url)
+    print(request.files)
+    # if 'imageFile' or 'scareFile' not in request.files:
+    #     flash('No file part')
+    #     return redirect(request.url)
     imageFile = request.files['imageFile']
+    scareFile = request.files['scareFile']
     if imageFile.filename == '':
-        flash('No image selected for uploading')
+        flash('No user image selected.')
         return redirect(request.url)
-    if imageFile and allowed_file(imageFile.filename):
+    if scareFile.filename == '':
+        flash('No scare image selected.')
+        return redirect(request.url)
+    if imageFile and allowed_file(imageFile.filename) and allowed_file(scareFile.filename):
         isdir = os.path.isdir(app.config['UPLOAD_FOLDER']) 
+        isScareDir = os.path.isdir(SCARE_FOLDER)
         if isdir:
             shutil.rmtree(app.config['UPLOAD_FOLDER'])
+        if isScareDir:
+             shutil.rmtree(SCARE_FOLDER)
         os.mkdir(app.config['UPLOAD_FOLDER'])
+        os.mkdir(SCARE_FOLDER)
         imageFile.save(os.path.join(app.config['UPLOAD_FOLDER'], imageFile.filename))
+        scareFile.save(os.path.join(SCARE_FOLDER, scareFile.filename))
         return render_template('video.html')
     else :
         flash('Allowed image types are - png, jpg, jpeg, webp')

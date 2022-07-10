@@ -7,8 +7,8 @@
 <div class="back">
   <div class="box">
     <!-- <div class = "container"> -->
-      <h1 class="text-center">Hey! No Peeping!</h1>
-      <label for="formFile" class="form-label">Provide Authorised User Image:</label>
+      <h1 class="text-center">Hey! No Snooping!</h1>
+      
       <p>
           {%with messages = get_flashed_messages()%}
             {% if messages %}
@@ -21,7 +21,17 @@
           {% endwith %}  
       </p>
       <form class="p-3 text-center" action="/" method="POST" enctype="multipart/form-data">
-          <input class="form-control" type="file" name="imageFile" automcomplete="off" required>
+          
+        <div>
+          <label for="imageFile" class="form-label">Authorised User Image: (Used to recognise the rightful user.)
+            <input class="form-control" type="file" name="imageFile" autocomplete="off" required>
+          </label>
+        </div>
+          <div>
+            <label for="scareFile" class="form-label">Scare Image: (Used to scare busybodies.)
+              <input class="form-control" type="file" name="scareFile" autocomplete="off" required>
+            </label>
+          </div>
           <input class="btn btn-primary mt-3" id= "thebutton" type="submit" value="Upload Image and Begin">
       </form> 
   </div>

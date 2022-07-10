@@ -2,6 +2,15 @@ import cv2
 import numpy as np
 from numpy import size
 from face_rec import FaceRec
+import os
+
+def load_images_from_folder(folder):
+    images = []
+    for filename in os.listdir(folder):
+        img = cv2.imread(os.path.join(folder,filename))
+        if img is not None:
+            images.append(img)
+    return images
 
 #load camera
 # capture = cv2.VideoCapture(0)
@@ -18,8 +27,9 @@ class Video(object):
         ret,frame=self.video.read()
         face_locations, face_names = sfr.detect_known_faces(frame)
         hb, wb, cb = frame.shape
-
-        scare_img = cv2.imread('./ghost.webp')
+        
+        #reading scary image from scare folder
+        scare_img = load_images_from_folder('./static/scare/')[0]
         scare_img_size = (wb, hb)
         scare_img = cv2.resize(scare_img, scare_img_size)
         scare_grey =cv2.cvtColor(scare_img, cv2.COLOR_BGR2GRAY)
