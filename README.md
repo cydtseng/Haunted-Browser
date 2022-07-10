@@ -21,7 +21,6 @@
 
 
 
-
 **Tech Stack**
 
 1. Python
@@ -33,9 +32,10 @@
 
 **Test The Project**
 1. Download code base
-2. On your terminal, enter "sudo pip3 install -r requirements.txt"
-3. Then again on your terminal, enter "flask run"
-4. Copy the url displayed on your terminal onto your browser and start testing!
+2. On your terminal, cd into the folder with the haunted browser project.
+3. Then enter "sudo pip3 install -r requirements.txt"
+4. Then enter "flask run"
+5. Copy the url displayed on your terminal onto your browser and start testing!
 
 
 **Known Issues**
